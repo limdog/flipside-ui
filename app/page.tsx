@@ -1,9 +1,14 @@
-import { MyAssistant } from "@/components/MyAssistant";
+import { Thread } from "@/components/assistant-ui/thread";
+import { AssistantRuntimeProvider, useEdgeRuntime } from "@assistant-ui/react";
 
 export default function Home() {
+  const runtime = useEdgeRuntime({ api: "/api/chat" });
+
   return (
-    <main className="h-dvh">
-      <MyAssistant />
-    </main>
+    <AssistantRuntimeProvider runtime={runtime}>
+      <main className="h-dvh">
+        <Thread />
+      </main>
+    </AssistantRuntimeProvider>
   );
 }
