@@ -1,8 +1,9 @@
 import { Thread } from "@/components/assistant-ui/thread";
-import { AssistantRuntimeProvider, useEdgeRuntime } from "@assistant-ui/react";
+import { useChatRuntime } from "@assistant-ui/react-ai-sdk";
+import { AssistantRuntimeProvider } from "@assistant-ui/react";
 
 export default function Home() {
-  const runtime = useEdgeRuntime({ api: "/api/chat" });
+  const runtime = useChatRuntime({ api: "/api/chat" });
 
   return (
     <AssistantRuntimeProvider runtime={runtime}>

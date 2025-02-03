@@ -1,16 +1,15 @@
 import { openai } from "@ai-sdk/openai";
-import { getEdgeRuntimeResponse } from "@assistant-ui/react/edge";
+import { streamText } from "ai";
 
 export const maxDuration = 30;
 
-export const POST = async (request: Request) => {
-  const requestData = await request.json();
+export async function POST(req: Request) {
+  const { messages } = await req.json();
 
-  return getEdgeRuntimeResponse({
-    options: {
-      model: openai("gpt-4o"),
-    },
-    requestData,
-    abortSignal: request.signal,
+  const result = streamText({
+    model: openai("gpt-4o"),
+    messages,
   });
-};
+
+  return result.toDataStreamResponse();
+}
